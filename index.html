@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#101a19">
+    <title>Keyflow — Typing Speed Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="#"><span class="brand-icon">≋</span>keyflow<span class="green">.</span></a>
+        <nav><a class="active" href="#test">Typing test</a><a href="#progress">Your progress</a></nav>
+        <span class="top-note"><i></i> YOUR PERSONAL PRACTICE SPACE</span>
+    </header>
+    <main class="shell">
+        <section class="intro">
+            <div class="eyebrow">— BUILD A BETTER RHYTHM</div>
+            <h1>Words per minute.<br><em>Confidence for life.</em></h1>
+            <p>A little practice goes a long way. Find your flow, focus on accuracy, and watch your typing improve one
+                word at a time.</p>
+        </section>
+        <section class="test-card" id="test">
+            <div class="card-head">
+                <div class="session-label"><i></i> TYPING SESSION <small id="session-id">SESSION 01</small></div>
+                <div><button id="new-text">↻ <span>New text</span></button><button id="restart" class="restart"
+                        title="Restart">⟲</button></div>
+            </div>
+            <div class="settings">
+                <div><label>DURATION</label>
+                    <div class="segments" id="durations"><button class="selected" data-time="15">15s</button><button
+                            data-time="30">30s</button><button data-time="60">60s</button><button
+                            data-time="120">120s</button></div>
+                </div>
+                <div><label for="difficulty">DIFFICULTY</label><select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select></div>
+                <div class="source"><label>TEXT SOURCE</label><span id="source">● Practice library</span></div>
+            </div>
+            <div class="metrics">
+                <div class="metric primary"><label>WPM</label><strong id="wpm">0</strong><small>words / minute</small>
+                </div>
+                <div class="metric"><label>ACCURACY</label><strong
+                        id="accuracy">100<span>%</span></strong><small>correct characters</small></div>
+                <div class="metric"><label>TIME LEFT</label><strong id="time">15<span>s</span></strong><small
+                        id="timer-state">ready when you are</small></div>
+                <div class="metric"><label>CHARACTERS</label><strong id="chars">0 <small>/
+                            0</small></strong><small>correct / typed</small></div>
+            </div>
+            <div class="progress-track">
+                <div id="progress"></div>
+            </div>
+            <div class="typing-box" id="typing-box">
+                <div class="passage-meta"><span>TYPE THE TEXT BELOW</span><span>Click the passage to focus</span></div>
+                <div id="passage" class="passage"></div>
+                <textarea id="typing-input" aria-label="Type the passage here" autocomplete="off" autocapitalize="off"
+                    spellcheck="false" placeholder="Start typing here..."></textarea>
+                <div class="typing-foot"><span id="hint">Click here or start typing to begin.</span><span id="count">0
+                        characters</span></div>
+            </div>
+            <div class="card-foot"><span>⌨ &nbsp;Focus on <b>accuracy</b> first. Speed follows.</span><button
+                    class="primary-btn" id="finish" disabled>Finish test ↗</button></div>
+        </section>
+        <section class="results hidden" id="results" aria-live="polite">
+            <div class="results-head">
+                <div>
+                    <div class="eyebrow">— SESSION COMPLETE</div>
+                    <h2>Nice work. <em>Keep going.</em></h2>
+                </div><button class="outline-btn" id="try-again">Try again ↻</button>
+            </div>
+            <div class="result-grid">
+                <div class="result-main"><label>YOUR TYPING SPEED</label><strong id="result-wpm">0</strong><small>WORDS
+                        PER MINUTE</small>
+                    <p id="message"></p>
+                </div>
+                <div><label>ACCURACY</label><strong id="result-accuracy">100%</strong></div>
+                <div><label>CORRECT CHARACTERS</label><strong id="result-correct">0</strong></div>
+                <div><label>ERRORS</label><strong id="result-errors">0</strong></div>
+            </div>
+            <p id="save-note" class="save-note">Your result has been saved on this device.</p>
+        </section>
+        <section class="progress-section" id="progress">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">— SMALL STEPS, REAL PROGRESS</div>
+                    <h2>Your progress <em>at a glance.</em></h2>
+                </div><button id="clear-history" class="clear-btn">Clear history</button>
+            </div>
+            <div class="dashboard">
+                <article class="stat-card best"><label>PERSONAL BEST</label><strong id="best">—</strong><small>WPM ·
+                        best session</small>
+                    <p id="best-detail">Complete a test to set your record.</p>
+                </article>
+                <article class="stat-card"><label>AVERAGE SPEED</label><strong id="average">—</strong><small>WPM · last
+                        10 sessions</small>
+                    <div id="bars" class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                </article>
+                <article class="stat-card"><label>TESTS COMPLETED</label><strong id="total">0</strong><small>practice
+                        sessions</small>
+                    <p>Your practice adds up.</p>
+                </article>
+            </div>
+            <div class="history">
+                <div class="history-head">
+                    <div>
+                        <h3>Recent sessions</h3>
+                        <p>Your latest typing results, saved locally.</p>
+                    </div><span>LOCAL HISTORY</span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>SESSION</th>
+                                <th>DATE</th>
+                                <th>DURATION</th>
+                                <th>WPM</th>
+                                <th>ACCURACY</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <tr>
+                                <td colspan="5" class="empty">No sessions yet. Complete your first test to see your
+                                    progress here.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <aside class="tip"><span>✳</span>
+            <div><b>A small tip for your next session</b>
+                <p>Keep your wrists relaxed, use all your fingers, and look at the screen instead of the keyboard.</p>
+            </div><small>01 / 03</small>
+        </aside>
+    </main>
+    <footer><a class="brand" href="#"><span class="brand-icon">≋</span>keyflow<span
+                class="green">.</span></a><span>Practice with purpose. Progress with every
+            keystroke.</span><small>VANILLA JS · BUILT TO IMPROVE</small></footer>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
